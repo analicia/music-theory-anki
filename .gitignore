@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# Editor
+*.swp
+*.swo
+*~
+
+# LilyPond intermediate files
+*.ps
+*.log
+
+# Anki
+*.anki2
+*.anki2-journal
