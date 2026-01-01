@@ -1,25 +1,35 @@
 # Music Theory Anki Decks
 
-Anki flashcard decks for learning piano music theory fundamentals, with notation images generated using [LilyPond](https://lilypond.org/).
-
-## Decks Included (10 Total)
-
-| Deck | Cards | Description |
-|------|-------|-------------|
-| Note Reading - Treble Beginner | 11 | Staff notes + 1 ledger line below (C4-F5) |
-| Note Reading - Treble Intermediate | 6 | 2 ledger lines above and below staff |
-| Note Reading - Treble Advanced | 15 | Full upper piano range (3+ ledger lines) |
-| Note Reading - Bass Beginner | 11 | Staff notes + 1 ledger line above (to Middle C) |
-| Note Reading - Bass Intermediate | 6 | 2 ledger lines above and below staff |
-| Note Reading - Bass Advanced | 11 | Full lower piano range (3+ ledger lines) |
-| Key Signatures - Treble Major | 15 | Major key signatures in treble clef |
-| Key Signatures - Treble Minor | 15 | Minor key signatures in treble clef |
-| Key Signatures - Bass Major | 15 | Major key signatures in bass clef |
-| Key Signatures - Bass Minor | 15 | Minor key signatures in bass clef |
+Anki flashcard decks for learning piano music theory fundamentals.
 
 ## Quick Start
 
-Just want the decks? Download `decks/music-theory.apkg` and import into Anki.
+Download `Music Theory.apkg` and import into Anki.
+
+## What's Included (224 Cards)
+
+| Sub-Deck | Cards | Topics |
+|----------|-------|--------|
+| Lessons / Lesson_001 | 70 | Vocabulary, scales, intervals, triads, relative keys |
+| Lessons / Lesson_002 | 57 | Melodic/harmonic intervals, inversion, frequency ratios, circle of fifths, clef reading |
+| Lessons / Lesson_003 | 42 | Three minor scale types, voice motion, enharmonic modulation |
+| Lessons / Lesson_004 | 38 | Music history periods, composers, terminology |
+| Mnemonics | 17 | Memory aids for key signatures, clef reading |
+
+### Tagging System
+
+All cards are tagged for filtered study:
+
+| Tag Type | Examples | Purpose |
+|----------|----------|---------|
+| `lesson::001` | `lesson::001`, `lesson::002` | Filter by lesson |
+| `type::` | `vocabulary`, `concept`, `mnemonic` | Card type |
+| `topic::` | `intervals`, `scales`, `triads`, `keys`, `history` | Subject area |
+
+**Example filtered study sessions:**
+- All intervals: `tag:topic::intervals`
+- Lesson 1 vocabulary: `tag:lesson::001 tag:type::vocabulary`
+- All mnemonics: `tag:type::mnemonic`
 
 ## Building from Source
 
@@ -106,12 +116,6 @@ Key signature images use LilyPond's auto-sizing with Scheme overrides for precis
 - Result: **416px wide** images with balanced margins, optimized for phone screens
 
 The `spacing-increment` value (1.5) provides comfortable spacing for keys with many accidentals (e.g., C♯ major with 7 sharps) while maintaining uniform width so students can't use staff length as a clue. Images include proper margins making them ready to use without additional cropping or post-processing.
-
-## Planned
-
-- **Key signature counting** - "How many sharps/flats in F♯ minor?" → "3 sharps"
-- **Key identification by count** - "Which minor key has 3 sharps?" → "F♯ minor"
-- **Basic music theory** - Circle of fifths, intervals, scales, etc.
 
 ## License
 

@@ -54,7 +54,6 @@ images/                # Mirrors src/ structure exactly
     └── bass/
 
 csv/                   # CSV files for Anki import
-decks/                 # Final .apkg Anki deck files
 ```
 
 ### LilyPond File Structure
@@ -109,3 +108,123 @@ Both functions suppress LilyPond stderr output (`2>/dev/null`) for cleaner build
 - Key signature files: Use lowercase with hyphens (e.g., `c-sharp-major.ly`, `a-flat-minor.ly`)
 - Note reading files: Use note name + octave (e.g., `c4.ly`, `g5.ly`)
 - Images automatically match source filename (e.g., `c-sharp-major.ly` → `c-sharp-major.png`)
+
+## Music Theory Flashcards (Text-Based)
+
+### Source Material
+
+Lesson notes are stored in Obsidian at:
+```
+/Users/ana/Documents/Obsidian Vault/Learning/Piano/Lessons/
+```
+
+Each lesson file (e.g., `2025-09-04.md`) contains vocabulary tables, concept explanations, and practice notes.
+
+### CSV Format
+
+All flashcard CSVs use three columns:
+```csv
+Front,Back,Tags
+"Question text with <b>bold</b> for key terms","Answer text","lesson::001 type::vocabulary topic::intervals"
+```
+
+- Use HTML `<b>` tags for emphasis (Anki renders these)
+- Escape quotes by doubling them: `""example""`
+- All cards import into a single "Music Theory" deck; tags enable filtered study
+
+### Tagging Schema
+
+Every card gets three tags:
+
+| Tag Type | Values | Purpose |
+|----------|--------|---------|
+| `lesson::` | `001`, `002`, `003`, `004`, ... | Filter by lesson |
+| `type::` | `vocabulary`, `concept` | Card type |
+| `topic::` | See list below | Subject area |
+
+**Topic tags:**
+- `basics` - sharps, flats, enharmonic
+- `intervals` - half steps, interval names, qualities, inversions
+- `scales` - patterns, scale types, degrees
+- `triads` - formulas, chord types
+- `keys` - relative/parallel keys, key signatures, circle of fifths
+- `expression` - consonance, dissonance, modulation
+- `motion` - parallel, contrary, oblique
+- `acoustics` - frequency ratios
+- `notation` - clef reading, mnemonics
+- `history` - periods, composers, terms
+
+### Card Creation Conventions
+
+**Vocabulary terms** (from lesson vocabulary tables):
+- Create TWO separate cards per term:
+  1. Term → Definition: `"What is a <b>sharp</b>?"` → `"A symbol that raises a note by one half step"`
+  2. Definition → Term: `"Which symbol raises a note by one half step?"` → `"A sharp (♯)"`
+- Tag with `type::vocabulary`
+
+**Concept cards** (from lesson content):
+- Single-sided cards testing understanding
+- Examples: scale patterns, interval half-step counts, triad formulas, historical facts
+- Tag with `type::concept`
+
+### File Naming
+
+```
+csv/music-theory-lesson-001.csv
+csv/music-theory-lesson-002.csv
+...
+```
+
+### Importing to Anki
+
+1. File → Import → select CSV
+2. Choose/create "Music Theory" deck (or appropriate sub-deck)
+3. Map: Field 1 = Front, Field 2 = Back, Field 3 = Tags
+4. Note type: "Basic" (single-sided cards)
+5. Imports are additive—new cards add to existing deck
+
+### Anki Deck Structure
+
+The "Music Theory" deck uses sub-decks for organization:
+
+```
+Music Theory/
+├── Lessons/
+│   ├── Lesson_001    # Music Theory Foundations
+│   ├── Lesson_002    # Intervals, Acoustics & Reading
+│   ├── Lesson_003    # Minor Scale Types & Voice Motion
+│   └── Lesson_004    # Music History Overview
+└── Mnemonics         # Memory aids for keys, clefs, etc.
+```
+
+When importing CSVs, select the appropriate sub-deck (e.g., `Music Theory::Lessons::Lesson_001`).
+
+### Mnemonics Deck
+
+The `csv/mnemonics.csv` file uses a simplified tagging schema:
+- `type::mnemonic` (instead of vocabulary/concept)
+- `topic::keys` or `topic::notation`
+- No `lesson::` tag (mnemonics span all lessons)
+
+### Exporting the Combined Deck
+
+Always export from the parent "Music Theory" deck to create a single `.apkg` package:
+
+1. Right-click "Music Theory" deck in Anki
+2. Select **Export**
+3. Choose "Anki Deck Package (.apkg)"
+4. Uncheck "Include scheduling information" (for sharing)
+5. Save as `Music Theory.apkg` in the base directory
+
+This preserves the sub-deck hierarchy and all tags. Do NOT export sub-decks individually.
+
+### Filtered Study Sessions
+
+Users can create filtered decks using tag queries:
+
+| To study... | Search query |
+|-------------|--------------|
+| All mnemonics | `tag:type::mnemonic` |
+| Lesson 1 only | `tag:lesson::001` |
+| All intervals | `tag:topic::intervals` |
+| Vocabulary only | `tag:type::vocabulary` |
